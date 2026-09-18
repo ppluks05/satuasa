@@ -1,29 +1,134 @@
-SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </span>
-                            <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATU ASA - Sekolah Anti-Perundungan & Santun Berbudaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1E40AF',
+                            sky: '#0284C7',
+                            yellow: '#F59E0B',
+                            red: '#EF4444',
+                            green: '#10B981',
+                            softBg: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+        }
+        .gradient-banner {
+            background: linear-gradient(135deg, #0284C7 0%, #1E40AF 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-white flex items-center justify-center p-1 shadow-sm">
+                        <img src="https://lh3.googleusercontent.com/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y=s1000" alt="Logo SATU ASA" class="object-contain w-full h-full" onerror="this.src='https://placehold.co/100x100/0284C7/ffffff?text=SATU+ASA'">
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-blue-900 block leading-tight">SATU ASA</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:block">Sekolah Anti-Perundungan & Santun Berbudaya</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-blue-600 bg-blue-50">🏠 Beranda</button>
+                    <button onclick="switchTab('daftar-isi')" id="nav-daftar-isi" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">📚 Daftar Isi</button>
+                    <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">🎮 Kuis</button>
+                    <button onclick="switchTab('ikrar')" id="nav-ikrar" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">💙 Ikrar & Komitmen</button>
+                    <button onclick="switchTab('drive')" id="nav-drive" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">📖 Drive Buku Saku</button>
+                    <button onclick="switchTab('tentang')" id="nav-tentang" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">👥 Tentang Proyek</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-blue-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('beranda')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">🏠 Beranda</button>
+            <button onclick="switchTab('daftar-isi')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">📚 Daftar Isi</button>
+            <button onclick="switchTab('kuis')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">🎮 Kuis Interaktif</button>
+            <button onclick="switchTab('ikrar')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">💙 Ikrar & Komitmen</button>
+            <button onclick="switchTab('drive')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">📖 Drive Buku Saku</button>
+            <button onclick="switchTab('tentang')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">👥 Tentang Proyek</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <section id="sec-beranda" class="tab-content transition-opacity duration-300">
+            <!-- Hero Banner -->
+            <div class="gradient-banner text-white relative overflow-hidden py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <div class="max-w-4xl mx-auto space-y-6">
+                        <div>
+                            <span class="inline-block bg-amber-400 text-slate-900 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-md uppercase tracking-wider mb-4">
+                                ✨ Proyek Kepemimpinan Anti Bullying
+                            </span>
+                            <h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight">
                                 SATU ASA
                             </h1>
-                            <p class="text-lg sm:text-xl font-semibold text-blue-100">
+                            <p class="text-xl sm:text-2xl font-semibold text-blue-100 mt-2">
                                 Sekolah Anti-Perundungan dan Santun Berbudaya
                             </p>
-                            <p class="text-sm sm:text-base text-blue-100/90 max-w-2xl">
-                                Kolaborasi Antar Sekolah: <br class="sm:hidden">
-                                <span class="font-bold text-amber-300">SDN Jati 06 & SDN Utan Kayu Selatan 05</span> <br>
-                                <span class="text-xs sm:text-sm opacity-90">PPG PGSD Universitas Negeri Jakarta</span>
-                            </p>
-                            <div class="pt-4 flex flex-wrap gap-3 justify-center lg:justify-start">
-                                <button onclick="switchTab('daftar-isi')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
-                                    <i class="fa-solid fa-book-open"></i> Pelajari Buku Saku
-                                </button>
-                                <button onclick="switchTab('ikrar')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl border border-white/30 backdrop-blur-sm transition-all flex items-center gap-2">
-                                    <i class="fa-solid fa-heart"></i> Isi Komitmen
-                                </button>
-                            </div>
                         </div>
 
-                        <div class="lg:col-span-5 flex justify-center">
-                            <div class="relative w-full max-w-md bg-white p-4 sm:p-6 rounded-3xl shadow-2xl border-4 border-amber-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
-                                <a href="https://drive.google.com/file/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Buka logo di Google Drive"><img src="https://drive.google.com/thumbnail?id=1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y&sz=w1200" alt="Logo Proyek SATU ASA" class="w-full h-auto rounded-2xl object-cover" onerror="this.src='https://placehold.co/500x500/0284C7/ffffff?text=SATU+ASA+LOGO'"></a>
-                                <div class="text-center mt-3">
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/20 max-w-2xl mx-auto shadow-xl">
+                            <p class="text-base sm:text-lg text-blue-100 font-medium">
+                                Kolaborasi Antar Sekolah: <br>
+                                <span class="font-extrabold text-amber-300 text-lg sm:text-xl block my-1">SDN Jati 06 & SDN Utan Kayu Selatan 05</span>
+                                <span class="text-xs sm:text-sm text-blue-200">PPG PGSD Universitas Negeri Jakarta</span>
+                            </p>
+                        </div>
+
+                        <div class="pt-2 flex flex-wrap gap-4 justify-center">
+                            <button onclick="switchTab('daftar-isi')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                                <i class="fa-solid fa-book-open"></i> Pelajari Buku Saku
+                            </button>
+                            <button onclick="switchTab('tentang')" class="bg-white hover:bg-slate-100 text-blue-900 font-bold px-7 py-3.5 rounded-xl shadow-lg transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-users"></i> Tentang Proyek
+                            </button>
+                        </div>
+
+                        <div class="pt-6 flex justify-center">
+                            <div class="relative w-full max-w-xs sm:max-w-sm bg-white p-4 rounded-3xl shadow-2xl border-4 border-amber-300">
+                                <img src="https://lh3.googleusercontent.com/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y=s1000" alt="Logo Proyek SATU ASA" class="w-full h-auto rounded-2xl object-cover" onerror="this.src='https://placehold.co/500x500/0284C7/ffffff?text=SATU+ASA+LOGO'">
+                                <div class="text-center mt-2">
                                     <p class="text-xs font-bold text-slate-600 italic">"Bersama Mewujudkan Sekolah Aman, Nyaman, dan Menyenangkan untuk Semua"</p>
                                 </div>
                             </div>
@@ -73,10 +178,36 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                 </div>
             </div>
 
+            <!-- Ringkasan Tentang Proyek di Home -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-8">
+                    <div class="text-center max-w-3xl mx-auto space-y-2">
+                        <span class="bg-blue-100 text-blue-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Mengenal Program Kami</span>
+                        <h2 class="text-3xl font-black text-slate-900">👥 Tentang Proyek SATU ASA</h2>
+                        <p class="text-slate-600 text-sm">Inisiatif Proyek Kepemimpinan Mahasiswa PPG PGSD Universitas Negeri Jakarta untuk Mewujudkan Sekolah Bebas Bullying.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8 items-center border-t pt-6">
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-extrabold text-blue-900">Kolaborasi Lintas Sekolah Dasar</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">
+                                SATU ASA dirancang sebagai wadah edukasi interaktif pencegahan perundungan di lingkungan sekolah dasar. Program ini digagas dalam rangka pengabdian dan proyek kepemimpinan berfokus pada pembentukan karakter siswa yang santun, peduli, dan berani bersuara.
+                            </p>
+                            <button onclick="switchTab('tentang')" class="inline-flex items-center gap-2 text-blue-600 font-bold text-sm hover:underline pt-2">
+                                Selengkapnya tentang Profil Tim & Anggota <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="overflow-hidden rounded-2xl border-2 border-amber-300 shadow-md">
+                            <img src="https://lh3.googleusercontent.com/d/1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT=s1000" alt="Tim Mahasiswa PPG SATU ASA" class="w-full h-56 object-cover" onerror="this.src='https://placehold.co/600x400/0284C7/ffffff?text=Foto+Tim+PPG'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Intro Highlight Section -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-16">
-                <div class="bg-gradient-to-r from-blue-900 to-sky-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
-                    <div class="max-w-3xl space-y-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 mb-16">
+                <div class="bg-gradient-to-r from-blue-900 to-sky-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden text-center">
+                    <div class="max-w-3xl mx-auto space-y-4">
                         <span class="text-amber-400 font-bold uppercase tracking-wider text-xs">SAPA AMAN (Sampaikan Aspirasi, Peduli, dan Aman)</span>
                         <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight">"Berani Baik, Berani Peduli, Berani Melapor!"</h2>
                         <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
@@ -112,7 +243,8 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                         </div>
                     </div>
 
-                    <div class="lg:col-span-8">
+                    <div class="lg:col-span-8 space-y-6">
+                        <!-- Chapter 1 -->
                         <div id="chap-1" class="chap-content bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 1</span>
@@ -132,8 +264,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                     <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Berani melapor jika melihat atau mengalami perundungan.</li>
                                 </ul>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button disabled class="px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-bold text-xs cursor-not-allowed opacity-50 flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-2')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 2 -->
                         <div id="chap-2" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 2</span>
@@ -154,8 +292,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">🚶‍♂️ Kesepian</div>
                                 <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">🚫 Tidak Nyaman Bercanda</div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-1')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-3')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 3 -->
                         <div id="chap-3" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 3</span>
@@ -184,8 +328,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                     </div>
                                 </div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-2')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-4')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 4 -->
                         <div id="chap-4" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 4</span>
@@ -213,8 +363,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                     Peraturan tentang Budaya Sekolah Aman dan Nyaman (berlaku sejak 9 Januari 2026 mencabut Permendikbudristek No. 46/2023). Menekankan sekolah yang aman secara fisik, psikologis, sosial, spiritual, dan digital.
                                 </div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-3')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-5')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 5 -->
                         <div id="chap-5" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 5</span>
@@ -242,8 +398,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                     <p class="font-semibold text-slate-700">Contoh: Pesan menghina, menyebar foto tanpa izin, membuat akun palsu untuk mengejek.</p>
                                 </div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-4')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-6')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 6 -->
                         <div id="chap-6" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 6</span>
@@ -258,8 +420,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">N</span> Nyatakan kejadian dengan jujur (siapa, apa, kapan, di mana).</div>
                                 <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">I</span> Isi laporan melalui Kotak SAPA AMAN.</div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-5')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-7')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 7 -->
                         <div id="chap-7" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 7</span>
@@ -276,8 +444,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                             <p class="text-center italic font-bold text-slate-700 bg-slate-100 p-3 rounded-xl">
                                 "Diam dapat membuat perundungan terus terjadi. Melapor adalah tindakan berani untuk membantu!"
                             </p>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-6')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-8')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 8 -->
                         <div id="chap-8" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 8</span>
@@ -293,8 +467,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">4. Ditindak</strong>Solusi bijak</div>
                                 <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">5. Tetap Aman</strong>Rahasia terjaga</div>
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-7')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-9')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 9 -->
                         <div id="chap-9" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 9</span>
@@ -306,8 +486,14 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                             <div class="p-6 bg-gradient-to-r from-blue-600 to-sky-600 text-white rounded-2xl text-center font-bold text-lg shadow-lg">
                                 "Satu Klik untuk Belajar, Satu Tindakan untuk Peduli."
                             </div>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-8')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button onclick="showChapter('chap-10')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
 
+                        <!-- Chapter 10 -->
                         <div id="chap-10" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
                             <div class="border-b pb-4">
                                 <span class="text-xs font-bold text-sky-600 uppercase">Bab 10</span>
@@ -326,6 +512,11 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <li>Republik Indonesia. (2023). <em>UU No. 1 Tahun 2023 tentang KUHP</em>.</li>
                                 <li>UNICEF Indonesia. (2026). <em>Apa itu Cyberbullying dan Bagaimana Menghentikannya?</em></li>
                             </ul>
+                            <!-- Navigasi Back / Next -->
+                            <div class="flex justify-between items-center pt-6 border-t">
+                                <button onclick="showChapter('chap-9')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition-all flex items-center gap-1"><i class="fa-solid fa-chevron-left"></i> Bab Sebelumnya</button>
+                                <button disabled class="px-4 py-2 bg-slate-100 text-slate-400 rounded-xl font-bold text-xs cursor-not-allowed opacity-50 flex items-center gap-1">Bab Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -353,8 +544,8 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                     <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm font-semibold"></div>
 
                     <div class="flex justify-end pt-2">
-                        <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all">
-                            Pertanyaan Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                            Pertanyaan Selanjutnya <i class="fa-solid fa-arrow-right text-xs"></i>
                         </button>
                     </div>
                 </div>
@@ -366,8 +557,8 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                     <h3 class="text-2xl font-black text-slate-800">Kuis Selesai!</h3>
                     <p id="quiz-final-score" class="text-4xl font-black text-blue-600">Skor: 100/100</p>
                     <p id="quiz-message" class="text-slate-600 font-medium text-sm"></p>
-                    <button onclick="restartQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition-all">
-                        <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Kuis
+                    <button onclick="restartQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Kuis
                     </button>
                 </div>
             </div>
@@ -451,12 +642,8 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <p class="text-xs text-slate-600 mt-1">Panduan Sekolah Anti-Perundungan & Santun Berbudaya lengkap untuk siswa dan guru.</p>
                             </div>
                             <div class="relative overflow-hidden rounded-2xl border border-emerald-200 shadow-sm bg-white p-2">
-  <a href="https://drive.google.com/file/d/1rP6rf5qnvikWyHS8g6nFUDOPn0TMoUcv/view?usp=sharing"
-     target="_blank" rel="noopener noreferrer"
-     class="flex h-48 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800 font-bold text-sm hover:bg-emerald-100 transition">
-     📖 Klik untuk Membuka Preview Buku Saku
-  </a>
-</div>
+                                <iframe src="https://drive.google.com/file/d/1rP6rf5qnvikWyHS8g6nFUDOPn0TMoUcv/preview" class="w-full h-48 rounded-xl border-0" title="Preview Buku Saku"></iframe>
+                            </div>
                         </div>
 
                         <a href="https://drive.google.com/file/d/1rP6rf5qnvikWyHS8g6nFUDOPn0TMoUcv/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm w-full">
@@ -476,12 +663,8 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <p class="text-xs text-slate-600 mt-1">Dokumen & slide presentasi pendukung sosialisasi perundungan.</p>
                             </div>
                             <div class="relative overflow-hidden rounded-2xl border border-blue-200 shadow-sm bg-white p-2">
-  <a href="https://drive.google.com/file/d/1RACdBWALo-6S3PZ4D6XYCS1o15uPOj4J/view?usp=sharing"
-     target="_blank" rel="noopener noreferrer"
-     class="flex h-48 items-center justify-center rounded-xl bg-blue-50 text-blue-800 font-bold text-sm hover:bg-blue-100 transition">
-     📚 Klik untuk Membuka Preview Materi
-  </a>
-</div>
+                                <iframe src="https://drive.google.com/file/d/1RACdBWALo-6S3PZ4D6XYCS1o15uPOj4J/preview" class="w-full h-48 rounded-xl border-0" title="Preview Materi Edukasi"></iframe>
+                            </div>
                         </div>
 
                         <a href="https://drive.google.com/file/d/1RACdBWALo-6S3PZ4D6XYCS1o15uPOj4J/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm w-full">
@@ -501,12 +684,6 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                         <li><strong>Sasaran:</strong> Siswa, Guru, dan Orang Tua SDN Jati 06 & SDN Utan Kayu Selatan 05</li>
                     </ul>
                 </div>
-            
-<div class="mt-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 text-center">
-  <strong>Akses:</strong> Jika dokumen/foto tidak terbuka untuk pengunjung, ubah izin Google Drive menjadi
-  <strong>“Siapa saja yang memiliki link → Viewer”</strong>.
-</div>
-
             </div>
         </section>
 
@@ -541,13 +718,13 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <div class="overflow-hidden rounded-2xl border-2 border-slate-100 shadow-sm">
-                                <a href="https://drive.google.com/file/d/1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Buka foto di Google Drive"><img src="https://drive.google.com/thumbnail?id=1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT&sz=w1600" alt="Foto Anggota Kelompok PPG SATU ASA UNJ" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/0284C7/ffffff?text=Foto+Anggota+Kelompok+PPG'"></a>
+                                <img src="https://lh3.googleusercontent.com/d/1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT=s1000" alt="Foto Anggota Kelompok PPG SATU ASA UNJ" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/0284C7/ffffff?text=Foto+Anggota+Kelompok+PPG'">
                             </div>
                             <p class="text-xs font-semibold text-slate-600 text-center">Tim Anggota Kelompok PPG PGSD Universitas Negeri Jakarta</p>
                         </div>
                         <div class="space-y-2">
                             <div class="overflow-hidden rounded-2xl border-2 border-slate-100 shadow-sm">
-                                <img src="https://drive.google.com/thumbnail?id=1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y&sz=w1200" alt="Logo Proyek SATU ASA" class="w-full h-64 object-contain bg-slate-50 p-4 hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/F59E0B/ffffff?text=Logo+SATU+ASA'">
+                                <img src="https://lh3.googleusercontent.com/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y=s1000" alt="Logo Proyek SATU ASA" class="w-full h-64 object-contain bg-slate-50 p-4 hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/F59E0B/ffffff?text=Logo+SATU+ASA'">
                             </div>
                             <p class="text-xs font-semibold text-slate-600 text-center">Logo Resmi SATU ASA - SDN Jati 06 & SDN Utan Kayu Selatan 05</p>
                         </div>
@@ -569,7 +746,7 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                             <p class="text-xs font-semibold text-blue-600">NIM: 200572510050</p>
                         </div>
                         <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                            <p class="font-bold text-sm text-slate-800">Auliana Laili Fajri. Zakya</p>
+                            <p class="font-bold text-sm text-slate-800">Auliana Laili Fajri Zakya</p>
                             <p class="text-xs font-semibold text-blue-600">NIM: 200572510054</p>
                         </div>
                         <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
@@ -625,7 +802,7 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <h4 class="font-bold text-slate-800 text-base">SDN Utan Kayu Selatan 05</h4>
                                 <p class="text-xs text-slate-600 mt-1">Sekolah Mitra Proyek SATU ASA</p>
                             </div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=SDN%20Utan%20Kayu%20Selatan%2005" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                            <a href="https://www.google.com/maps/search/?api=1&query=SDN+Utan+Kayu+Selatan+05" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
                                 <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                             </a>
                         </div>
@@ -638,7 +815,7 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <h4 class="font-bold text-slate-800 text-base">SDN Jati 06</h4>
                                 <p class="text-xs text-slate-600 mt-1">Sekolah Mitra Proyek SATU ASA</p>
                             </div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=SDN%20Jati%2006%20Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                            <a href="https://www.google.com/maps/search/?api=1&query=SDN+Jati+06+Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
                                 <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                             </a>
                         </div>
@@ -651,7 +828,7 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                                 <h4 class="font-bold text-slate-800 text-base">LPTK Universitas Negeri Jakarta</h4>
                                 <p class="text-xs text-slate-600 mt-1">LPTK Penyelenggara PPG PGSD UNJ</p>
                             </div>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Universitas%20Negeri%20Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Universitas+Negeri+Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
                                 <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                             </a>
                         </div>
@@ -703,11 +880,17 @@ SATU_ASA_Revisi_Navigasi_Home_Tentang_Proyek.html                            </s
                 btn.classList.add('text-slate-700');
             });
 
-            document.getElementById(chapId).classList.remove('hidden');
+            const selectedChap = document.getElementById(chapId);
+            if (selectedChap) {
+                selectedChap.classList.remove('hidden');
+            }
+
             const activeBtn = document.getElementById(`chap-btn-${chapId.split('-')[1]}`);
             if (activeBtn) {
                 activeBtn.classList.add('bg-blue-50', 'text-blue-700', 'font-bold');
             }
+
+            window.scrollTo({ top: 200, behavior: 'smooth' });
         }
 
         const quizData = [

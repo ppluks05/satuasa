@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<style>
+/* Canva-compatible fallback: original design remains the primary styling. */
+a{cursor:pointer}
+a[href^="https://www.google.com/maps/"]{cursor:pointer}
+img{display:block}
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATU ASA - Sekolah Anti-Perundungan & Santun Berbudaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1E40AF',
+                            sky: '#0284C7',
+                            yellow: '#F59E0B',
+                            red: '#EF4444',
+                            green: '#10B981',
+                            softBg: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.1), 0 8px 10px -6px rgba(14, 165, 233, 0.1);
+        }
+        .gradient-banner {
+            background: linear-gradient(135deg, #0284C7 0%, #1E40AF 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-amber-400 bg-white flex items-center justify-center p-1 shadow-sm">
+                        <a href="https://drive.google.com/file/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Buka logo di Google Drive"><img src="https://drive.google.com/thumbnail?id=1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y&sz=w1200" alt="Logo SATU ASA" class="object-contain w-full h-full" onerror="this.src='https://placehold.co/100x100/0284C7/ffffff?text=SATU+ASA'"></a>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-blue-900 block leading-tight">SATU ASA</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:block">Sekolah Anti-Perundungan & Santun Berbudaya</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-blue-600 bg-blue-50">🏠 Beranda</button>
+                    <button onclick="switchTab('daftar-isi')" id="nav-daftar-isi" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">📚 Daftar Isi</button>
+                    <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">🎮 Kuis</button>
+                    <button onclick="switchTab('ikrar')" id="nav-ikrar" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">💙 Ikrar & Komitmen</button>
+                    <button onclick="switchTab('drive')" id="nav-drive" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">📖 Drive Buku Saku</button>
+                    <button onclick="switchTab('tentang')" id="nav-tentang" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-all duration-200">👥 Tentang Proyek</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:text-blue-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('beranda')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">🏠 Beranda</button>
+            <button onclick="switchTab('daftar-isi')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">📚 Daftar Isi</button>
+            <button onclick="switchTab('kuis')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">🎮 Kuis Interaktif</button>
+            <button onclick="switchTab('ikrar')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">💙 Ikrar & Komitmen</button>
+            <button onclick="switchTab('drive')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">📖 Drive Buku Saku</button>
+            <button onclick="switchTab('tentang')" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-600">👥 Tentang Proyek</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <section id="sec-beranda" class="tab-content transition-opacity duration-300">
+            <!-- Hero Banner -->
+            <div class="gradient-banner text-white relative overflow-hidden py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <span class="inline-block bg-amber-400 text-slate-900 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-md uppercase tracking-wider">
+                                ✨ Proyek Kepemimpinan Anti Bullying
+                            </span>
+                            <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
+                                SATU ASA
+                            </h1>
+                            <p class="text-lg sm:text-xl font-semibold text-blue-100">
+                                Sekolah Anti-Perundungan dan Santun Berbudaya
+                            </p>
+                            <p class="text-sm sm:text-base text-blue-100/90 max-w-2xl">
+                                Kolaborasi Antar Sekolah: <br class="sm:hidden">
+                                <span class="font-bold text-amber-300">SDN Jati 06 & SDN Utan Kayu Selatan 05</span> <br>
+                                <span class="text-xs sm:text-sm opacity-90">PPG PGSD Universitas Negeri Jakarta</span>
+                            </p>
+                            <div class="pt-4 flex flex-wrap gap-3 justify-center lg:justify-start">
+                                <button onclick="switchTab('daftar-isi')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                                    <i class="fa-solid fa-book-open"></i> Pelajari Buku Saku
+                                </button>
+                                <button onclick="switchTab('ikrar')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl border border-white/30 backdrop-blur-sm transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-heart"></i> Isi Komitmen
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="relative w-full max-w-md bg-white p-4 sm:p-6 rounded-3xl shadow-2xl border-4 border-amber-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                                <a href="https://drive.google.com/file/d/1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Buka logo di Google Drive"><img src="https://drive.google.com/thumbnail?id=1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y&sz=w1200" alt="Logo Proyek SATU ASA" class="w-full h-auto rounded-2xl object-cover" onerror="this.src='https://placehold.co/500x500/0284C7/ffffff?text=SATU+ASA+LOGO'"></a>
+                                <div class="text-center mt-3">
+                                    <p class="text-xs font-bold text-slate-600 italic">"Bersama Mewujudkan Sekolah Aman, Nyaman, dan Menyenangkan untuk Semua"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Summary Cards Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 mb-16">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="switchTab('daftar-isi')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors text-xl font-bold">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-2">Apa Itu Bullying?</h3>
+                        <p class="text-xs text-slate-600 line-clamp-3">Perilaku menyakiti, merendahkan, atau mengganggu orang lain secara berulang dan disengaja.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-blue-600 mt-4 group-hover:underline">Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></span>
+                    </div>
+
+                    <div onclick="switchTab('kuis')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors text-xl font-bold">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-2">Kuis Interaktif</h3>
+                        <p class="text-xs text-slate-600 line-clamp-3">Uji pemahamanmu tentang perundungan dan cara menjadi Teman Penolong melalui kuis seru!</p>
+                        <span class="inline-flex items-center text-xs font-bold text-amber-600 mt-4 group-hover:underline">Mulai Kuis <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></span>
+                    </div>
+
+                    <div onclick="switchTab('ikrar')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-rose-600 group-hover:text-white transition-colors text-xl font-bold">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-2">Ikrar & Komitmen</h3>
+                        <p class="text-xs text-slate-600 line-clamp-3">Ucapkan ikrar Teman Hebat dan dapatkan sertifikat komitmen anti-perundungan digital milikmu.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-rose-600 mt-4 group-hover:underline">Isi Komitmen <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></span>
+                    </div>
+
+                    <div onclick="switchTab('drive')" class="cursor-pointer bg-white p-6 rounded-2xl shadow-lg border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors text-xl font-bold">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-800 mb-2">Drive Buku Saku</h3>
+                        <p class="text-xs text-slate-600 line-clamp-3">Akses dan unduh buku saku digital lengkap "SAPA AMAN" langsung dari Google Drive.</p>
+                        <span class="inline-flex items-center text-xs font-bold text-emerald-600 mt-4 group-hover:underline">Buka PDF <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intro Highlight Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-16">
+                <div class="bg-gradient-to-r from-blue-900 to-sky-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                    <div class="max-w-3xl space-y-4">
+                        <span class="text-amber-400 font-bold uppercase tracking-wider text-xs">SAPA AMAN (Sampaikan Aspirasi, Peduli, dan Aman)</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight">"Berani Baik, Berani Peduli, Berani Melapor!"</h2>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
+                            Sekolah adalah tempat kita belajar, bermain, berteman, dan mengembangkan diri. Setiap murid berhak merasa aman, nyaman, dihargai, dan diterima tanpa rasa takut akan perundungan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-daftar-isi" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="bg-blue-100 text-blue-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Materi Lengkap</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">📚 Daftar Isi Buku Saku SAPA AMAN</h2>
+                    <p class="text-slate-600 text-sm mt-2">Pelajari materi lengkap perlindungan anak dan panduan pencegahan perundungan di sekolah.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-4 space-y-2 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm h-fit sticky top-24">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 py-2">Daftar Bab</h3>
+                        <div class="space-y-1 text-sm font-semibold">
+                            <button onclick="showChapter('chap-1')" id="chap-btn-1" class="chap-btn w-full text-left px-4 py-3 rounded-xl bg-blue-50 text-blue-700 font-bold flex items-center gap-2"><span>1.</span> Kita Semua Teman Hebat</button>
+                            <button onclick="showChapter('chap-2')" id="chap-btn-2" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>2.</span> Apa Itu Perundungan?</button>
+                            <button onclick="showChapter('chap-3')" id="chap-btn-3" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>3.</span> Tiga Ciri Utama Perundungan</button>
+                            <button onclick="showChapter('chap-4')" id="chap-btn-4" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>4.</span> Dasar Hukum Perlindungan</button>
+                            <button onclick="showChapter('chap-5')" id="chap-btn-5" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>5.</span> Macam-Macam Perundungan</button>
+                            <button onclick="showChapter('chap-6')" id="chap-btn-6" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>6.</span> Langkah BERANI</button>
+                            <button onclick="showChapter('chap-7')" id="chap-btn-7" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>7.</span> Teman Penolong</button>
+                            <button onclick="showChapter('chap-8')" id="chap-btn-8" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>8.</span> Kotak SAPA AMAN</button>
+                            <button onclick="showChapter('chap-9')" id="chap-btn-9" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>9.</span> Website SATU ASA</button>
+                            <button onclick="showChapter('chap-10')" id="chap-btn-10" class="chap-btn w-full text-left px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-50 flex items-center gap-2"><span>10.</span> Penutup & Daftar Pustaka</button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8">
+                        <div id="chap-1" class="chap-content bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 1</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Kita Semua Teman Hebat</h3>
+                                <p class="text-slate-500 text-sm">Bersama Mewujudkan Sekolah Aman, Nyaman, dan Menyenangkan</p>
+                            </div>
+                            <p class="text-slate-700 leading-relaxed">
+                                Sekolah adalah tempat kita belajar, bermain, berteman, dan mengembangkan diri. Setiap murid berhak merasa <strong>aman, nyaman, dihargai, dan diterima</strong>.
+                            </p>
+                            <div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-xl">
+                                <h4 class="font-bold text-amber-900 text-base mb-3">MARI KITA MENJADI TEMAN HEBAT DENGAN CARA:</h4>
+                                <ul class="space-y-2 text-sm text-slate-700 font-medium">
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Berbicara dengan sopan.</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Menghargai perbedaan.</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Membantu teman yang mengalami kesulitan.</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Tidak mengejek atau menyakiti teman.</li>
+                                    <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-500"></i> Berani melapor jika melihat atau mengalami perundungan.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="chap-2" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 2</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Apa Itu Perundungan?</h3>
+                            </div>
+                            <p class="text-slate-700 leading-relaxed">
+                                <strong>Perundungan (Bullying)</strong> adalah perilaku menyakiti, merendahkan, menakut-nakuti, atau mengganggu orang lain secara berulang. Perundungan dapat dilakukan oleh seseorang maupun sekelompok orang.
+                            </p>
+                            <div class="bg-rose-50 border border-rose-200 p-4 rounded-xl text-rose-800 text-sm">
+                                <i class="fa-solid fa-circle-exclamation mr-1"></i> Perundungan bukan sekadar candaan apabila ucapan atau tindakan tersebut membuat orang lain terluka, takut, terhina, atau tidak nyaman.
+                            </div>
+                            <h4 class="font-bold text-slate-800">Dampak Buruk yang Dirasakan Korban:</h4>
+                            <div class="grid sm:grid-cols-3 gap-3 text-center">
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">😭 Sedih</div>
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">😨 Takut</div>
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">😳 Malu</div>
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">😔 Tidak Percaya Diri</div>
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">🚶‍♂️ Kesepian</div>
+                                <div class="p-3 bg-red-50 text-red-700 rounded-xl font-bold text-sm">🚫 Tidak Nyaman Bercanda</div>
+                            </div>
+                        </div>
+
+                        <div id="chap-3" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 3</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">3 Ciri Utama Perundungan</h3>
+                            </div>
+                            <div class="grid gap-4">
+                                <div class="p-4 bg-sky-50 rounded-xl border border-sky-100 flex gap-4">
+                                    <div class="w-10 h-10 bg-sky-600 text-white font-bold rounded-lg flex items-center justify-center shrink-0">1</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-base">Menyakiti (Kesengajaan)</h4>
+                                        <p class="text-xs text-slate-600 mt-1">Menimbulkan luka fisik, psikologis, atau perasaan secara sengaja.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-sky-50 rounded-xl border border-sky-100 flex gap-4">
+                                    <div class="w-10 h-10 bg-sky-600 text-white font-bold rounded-lg flex items-center justify-center shrink-0">2</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-base">Berulang</h4>
+                                        <p class="text-xs text-slate-600 mt-1">Perilaku agresif yang dilakukan lebih dari satu kali atau berpotensi terus terjadi dari waktu ke waktu.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-sky-50 rounded-xl border border-sky-100 flex gap-4">
+                                    <div class="w-10 h-10 bg-sky-600 text-white font-bold rounded-lg flex items-center justify-center shrink-0">3</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-base">Ketidakseimbangan Kekuatan</h4>
+                                        <p class="text-xs text-slate-600 mt-1">Korban kesulitan membela diri karena adanya ketimpangan kekuasaan (pelaku lebih kuat, lebih banyak, atau memiliki pengaruh lebih besar).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="chap-4" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 4</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Dasar Hukum Perlindungan Anak</h3>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-700">
+                                <div class="p-3 border rounded-xl bg-slate-50">
+                                    <strong class="text-blue-900 block">UUD 1945:</strong>
+                                    Landasan konstitusional hak anak memperoleh pendidikan dan perlindungan dari perlakuan yang merendahkan martabat manusia.
+                                </div>
+                                <div class="p-3 border rounded-xl bg-slate-50">
+                                    <strong class="text-blue-900 block">UU No. 20 Tahun 2003 (Sisdiknas):</strong>
+                                    Pendidikan harus diselenggarakan secara demokratis, berkeadilan, tidak diskriminatif, dan menjunjung tinggi HAM.
+                                </div>
+                                <div class="p-3 border rounded-xl bg-slate-50">
+                                    <strong class="text-blue-900 block">UU No. 35 Tahun 2014 (Perlindungan Anak) Pasal 76C:</strong>
+                                    Melarang setiap orang melakukan, menyuruh melakukan, atau turut serta melakukan kekerasan terhadap anak baik fisik maupun psikis.
+                                </div>
+                                <div class="p-3 border rounded-xl bg-slate-50">
+                                    <strong class="text-blue-900 block">UU No. 1 Tahun 2023 / UU No. 1 Tahun 2026 (KUHP):</strong>
+                                    Dasar hukum pidana bagi tindakan perundungan yang memenuhi unsur kekerasan/ancaman.
+                                </div>
+                                <div class="p-3 border rounded-xl bg-amber-50 border-amber-200">
+                                    <strong class="text-amber-900 block">Permendikdasmen No. 6 Tahun 2026:</strong>
+                                    Peraturan tentang Budaya Sekolah Aman dan Nyaman (berlaku sejak 9 Januari 2026 mencabut Permendikbudristek No. 46/2023). Menekankan sekolah yang aman secara fisik, psikologis, sosial, spiritual, dan digital.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="chap-5" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 5</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Macam-Macam Perundungan</h3>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-4 text-xs">
+                                <div class="p-4 border rounded-xl bg-red-50/50">
+                                    <h4 class="font-bold text-red-800 text-sm mb-1"><i class="fa-solid fa-comment-slash"></i> Verbal</h4>
+                                    <p class="text-slate-600 mb-2">Melalui kata-kata yang menyakiti/merendahkan.</p>
+                                    <p class="font-semibold text-slate-700">Contoh: Mengejek nama/fisik, julukan menghina, mencela, mengancam, menyebar gosip.</p>
+                                </div>
+                                <div class="p-4 border rounded-xl bg-red-50/50">
+                                    <h4 class="font-bold text-red-800 text-sm mb-1"><i class="fa-solid fa-hand-fist"></i> Nonverbal / Fisik</h4>
+                                    <p class="text-slate-600 mb-2">Menyakiti atau mencederai secara fisik.</p>
+                                    <p class="font-semibold text-slate-700">Contoh: Mendorong, memukul, menendang, menjegal, merusak/mengambil barang.</p>
+                                </div>
+                                <div class="p-4 border rounded-xl bg-red-50/50">
+                                    <h4 class="font-bold text-red-800 text-sm mb-1"><i class="fa-solid fa-users-slash"></i> Sosial / Relasional</h4>
+                                    <p class="text-slate-600 mb-2">Mengganggu hubungan sosial hingga dikucilkan.</p>
+                                    <p class="font-semibold text-slate-700">Contoh: Sengaja mengucilkan, menghasut teman agar menjauhi, mendiamkan.</p>
+                                </div>
+                                <div class="p-4 border rounded-xl bg-red-50/50">
+                                    <h4 class="font-bold text-red-800 text-sm mb-1"><i class="fa-solid fa-laptop-code"></i> Cyberbullying</h4>
+                                    <p class="text-slate-600 mb-2">Menggunakan teknologi digital / media sosial.</p>
+                                    <p class="font-semibold text-slate-700">Contoh: Pesan menghina, menyebar foto tanpa izin, membuat akun palsu untuk mengejek.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="chap-6" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 6</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Langkah B-E-R-A-N-I</h3>
+                                <p class="text-slate-500 text-sm">Apa yang Harus Dilakukan Jika Mengalami Perundungan?</p>
+                            </div>
+                            <div class="space-y-3 font-semibold text-sm">
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">B</span> Berusaha tetap tenang (tarik napas & jangan salahkan diri).</div>
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">E</span> Ekspresikan bahwa kamu tidak suka ("Berhenti! Saya tidak suka!").</div>
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">R</span> Rencanakan untuk menjauh ke tempat aman dekat guru/teman.</div>
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">A</span> Ajak bicara orang dewasa tepercaya (guru, ortu, wali kelas).</div>
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">N</span> Nyatakan kejadian dengan jujur (siapa, apa, kapan, di mana).</div>
+                                <div class="flex items-center gap-3 p-3 bg-blue-50 text-blue-900 rounded-xl"><span class="w-8 h-8 rounded-full bg-blue-600 text-white font-black flex items-center justify-center shrink-0">I</span> Isi laporan melalui Kotak SAPA AMAN.</div>
+                            </div>
+                        </div>
+
+                        <div id="chap-7" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 7</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Jadilah Teman Penolong</h3>
+                                <p class="text-slate-500 text-sm">Jika Melihat Perundungan Terjadi</p>
+                            </div>
+                            <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-xl space-y-2 text-sm text-emerald-900 font-medium">
+                                <p><i class="fa-solid fa-check text-emerald-600"></i> Jangan ikut menertawakan atau merekam.</p>
+                                <p><i class="fa-solid fa-check text-emerald-600"></i> Jangan membalas dengan kekerasan.</p>
+                                <p><i class="fa-solid fa-check text-emerald-600"></i> Temani korban ke tempat aman.</p>
+                                <p><i class="fa-solid fa-check text-emerald-600"></i> Panggil guru atau orang dewasa.</p>
+                                <p><i class="fa-solid fa-check text-emerald-600"></i> Sampaikan kejadian dengan jujur dan jaga privasi korban.</p>
+                            </div>
+                            <p class="text-center italic font-bold text-slate-700 bg-slate-100 p-3 rounded-xl">
+                                "Diam dapat membuat perundungan terus terjadi. Melapor adalah tindakan berani untuk membantu!"
+                            </p>
+                        </div>
+
+                        <div id="chap-8" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 8</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Solusi Kita: SAPA AMAN</h3>
+                                <p class="text-slate-500 text-sm">Sampaikan Aspirasi, Peduli, dan Aman</p>
+                            </div>
+                            <p class="text-slate-700 text-sm"><strong>SAPA AMAN</strong> adalah Kotak Laporan yang disediakan untuk membantu murid menyampaikan pengalaman, cerita, atau kejadian perundungan secara aman, nyaman, dan rahasia.</p>
+                            <h4 class="font-bold text-slate-800 text-sm">5 Langkah Cara Kerja SAPA AMAN:</h4>
+                            <div class="grid sm:grid-cols-5 gap-2 text-center text-xs">
+                                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">1. Tulis</strong>Jujur & jelas</div>
+                                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">2. Masukkan</strong>Ke kotak fisik</div>
+                                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">3. Dibaca</strong>Oleh guru tim</div>
+                                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">4. Ditindak</strong>Solusi bijak</div>
+                                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200"><strong class="block text-amber-800">5. Tetap Aman</strong>Rahasia terjaga</div>
+                            </div>
+                        </div>
+
+                        <div id="chap-9" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 9</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Website SATU ASA</h3>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                Website SATU ASA berisi informasi dan media edukasi tentang sekolah aman, santun, dan bebas dari perundungan.
+                            </p>
+                            <div class="p-6 bg-gradient-to-r from-blue-600 to-sky-600 text-white rounded-2xl text-center font-bold text-lg shadow-lg">
+                                "Satu Klik untuk Belajar, Satu Tindakan untuk Peduli."
+                            </div>
+                        </div>
+
+                        <div id="chap-10" class="chap-content hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                            <div class="border-b pb-4">
+                                <span class="text-xs font-bold text-sky-600 uppercase">Bab 10</span>
+                                <h3 class="text-2xl font-black text-slate-900 mt-1">Penutup & Daftar Pustaka</h3>
+                            </div>
+                            <div class="p-4 bg-emerald-50 rounded-xl text-emerald-900 font-bold text-center text-sm">
+                                "SATU ASA: Satu Kepedulian, Satu Keberanian, Satu Sekolah yang Aman untuk Semua."
+                            </div>
+                            <h4 class="font-bold text-slate-800 text-sm border-b pb-2">Daftar Pustaka Referensi Buku Saku:</h4>
+                            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                                <li>Kementerian Pendidikan Dasar dan Menengah RI. (2026). <em>Permendikdasmen No. 6 Tahun 2026 tentang Budaya Sekolah Aman dan Nyaman</em>.</li>
+                                <li>Olweus, D. (1993). <em>Bullying at School: What We Know and What We Can Do</em>. Blackwell Publishing.</li>
+                                <li>Republik Indonesia. (1945). <em>Undang-Undang Dasar Negara Republik Indonesia Tahun 1945</em>.</li>
+                                <li>Republik Indonesia. (2003). <em>UU No. 20 Tahun 2003 tentang Sistem Pendidikan Nasional</em>.</li>
+                                <li>Republik Indonesia. (2014). <em>UU No. 35 Tahun 2014 tentang Perlindungan Anak</em>.</li>
+                                <li>Republik Indonesia. (2023). <em>UU No. 1 Tahun 2023 tentang KUHP</em>.</li>
+                                <li>UNICEF Indonesia. (2026). <em>Apa itu Cyberbullying dan Bagaimana Menghentikannya?</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-kuis" class="tab-content hidden py-12">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-8">
+                    <span class="bg-amber-100 text-amber-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Uji Pemahaman</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">🎮 Kuis Interaktif SATU ASA</h2>
+                    <p class="text-slate-600 text-sm mt-1">Jawab pertanyaan di bawah ini untuk menguji pemahamanmu tentang sekolah aman tanpa perundungan!</p>
+                </div>
+
+                <div id="quiz-card" class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                    <div class="flex justify-between items-center border-b pb-4">
+                        <span id="quiz-progress" class="text-xs font-bold text-blue-600 uppercase">Pertanyaan 1 dari 5</span>
+                        <span id="quiz-score-badge" class="bg-blue-50 text-blue-700 font-bold text-xs px-3 py-1 rounded-full">Skor: 0</span>
+                    </div>
+
+                    <h3 id="quiz-question" class="text-lg font-bold text-slate-800"></h3>
+
+                    <div id="quiz-options" class="grid gap-3"></div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm font-semibold"></div>
+
+                    <div class="flex justify-end pt-2">
+                        <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl transition-all">
+                            Pertanyaan Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-result" class="hidden bg-white p-8 rounded-3xl border border-slate-200 shadow-xl text-center space-y-6">
+                    <div class="w-20 h-20 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center mx-auto text-4xl">
+                        🏆
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-800">Kuis Selesai!</h3>
+                    <p id="quiz-final-score" class="text-4xl font-black text-blue-600">Skor: 100/100</p>
+                    <p id="quiz-message" class="text-slate-600 font-medium text-sm"></p>
+                    <button onclick="restartQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition-all">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Kuis
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-ikrar" class="tab-content hidden py-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="bg-rose-100 text-rose-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Janji Teman Hebat</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">💙 Ikrar & Komitmen Digital</h2>
+                </div>
+
+                <div class="bg-gradient-to-br from-amber-50 via-sky-50 to-blue-50 border-2 border-amber-300 p-6 sm:p-10 rounded-3xl shadow-lg relative overflow-hidden text-center space-y-4">
+                    <h3 class="text-xl font-black text-blue-900 uppercase tracking-wide">IKRAR TEMAN HEBAT</h3>
+                    <div class="w-16 h-1 bg-amber-400 mx-auto rounded-full"></div>
+                    <ul class="text-slate-700 font-semibold text-sm sm:text-base space-y-3 max-w-xl mx-auto text-left list-disc list-inside">
+                        <li>Saya berjanji akan menghargai semua teman.</li>
+                        <li>Saya tidak akan mengejek, menyakiti, atau mengucilkan teman.</li>
+                        <li>Saya akan berani membantu teman yang membutuhkan.</li>
+                        <li>Saya akan melapor jika melihat atau mengalami perundungan.</li>
+                        <li>Saya siap menjadi bagian dari sekolah yang aman, nyaman, dan menyenangkan.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 border-b pb-3">✍️ Tanda Tangani Komitmen Anti-Perundungan</h3>
+                    <form id="commitment-form" onsubmit="submitCommitment(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap Siswa / Pengunjung</label>
+                            <input type="text" id="comm-name" required placeholder="Masukkan nama kamu..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Asal Sekolah / Instansi</label>
+                            <select id="comm-school" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                                <option value="">-- Pilih Sekolah --</option>
+                                <option value="SDN Jati 06">SDN Jati 06</option>
+                                <option value="SDN Utan Kayu Selatan 05">SDN Utan Kayu Selatan 05</option>
+                                <option value="Lainnya">Sekolah / Instansi Lain</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Pernyataan Komitmen</label>
+                            <div class="p-3 bg-slate-50 border rounded-xl text-xs font-bold text-blue-900">
+                                "Saya berani baik, peduli, dan melapor untuk mewujudkan lingkungan bebas perundungan."
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-signature"></i> Kirim Komitmen & Dapatkan Sertifikat
+                        </button>
+                    </form>
+
+                    <div id="cert-result" class="hidden pt-6 border-t border-slate-100">
+                        <div class="bg-gradient-to-r from-blue-900 to-sky-900 text-white p-6 rounded-2xl text-center space-y-3 relative overflow-hidden shadow-2xl">
+                            <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">Sertifikat Duta Anti Bullying</span>
+                            <h4 class="text-2xl font-black" id="cert-name-display">NAMA SISWA</h4>
+                            <p class="text-xs text-blue-100">Telah secara resmi berkomitmen menjadi Teman Hebat di <span id="cert-school-display" class="font-bold text-amber-300"></span></p>
+                            <p class="text-[10px] text-blue-200 italic">"Satu Asa - Bersama Mewujudkan Sekolah Aman, Nyaman, dan Menyenangkan"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sec-drive" class="tab-content hidden py-12">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center">
+                    <span class="bg-emerald-100 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Akses PDF Dokumen & Materi</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">📖 Drive Dokumen & Materi Edukasi</h2>
+                    <p class="text-slate-600 text-sm mt-1">Unduh atau baca langsung buku saku dan materi edukasi lengkap melalui Google Drive.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                    <!-- Resource Item 1: Buku Saku -->
+                    <div class="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border-2 border-emerald-300 shadow-xl flex flex-col justify-between text-center space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-black text-emerald-950">Buku Saku SAPA AMAN</h3>
+                                <p class="text-xs text-slate-600 mt-1">Panduan Sekolah Anti-Perundungan & Santun Berbudaya lengkap untuk siswa dan guru.</p>
+                            </div>
+                            <div class="relative overflow-hidden rounded-2xl border border-emerald-200 shadow-sm bg-white p-2">
+  <a href="https://drive.google.com/file/d/1rP6rf5qnvikWyHS8g6nFUDOPn0TMoUcv/view?usp=sharing"
+     target="_blank" rel="noopener noreferrer"
+     class="flex h-48 items-center justify-center rounded-xl bg-emerald-50 text-emerald-800 font-bold text-sm hover:bg-emerald-100 transition">
+     📖 Klik untuk Membuka Preview Buku Saku
+  </a>
+</div>
+                        </div>
+
+                        <a href="https://drive.google.com/file/d/1rP6rf5qnvikWyHS8g6nFUDOPn0TMoUcv/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm w-full">
+                            <span>📖 Buka Buku Saku</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Resource Item 2: Materi Edukasi -->
+                    <div class="p-6 bg-gradient-to-br from-blue-50 to-sky-50 rounded-3xl border-2 border-blue-300 shadow-xl flex flex-col justify-between text-center space-y-6">
+                        <div class="space-y-4">
+                            <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-black text-blue-950">Materi Edukasi SATU ASA</h3>
+                                <p class="text-xs text-slate-600 mt-1">Dokumen & slide presentasi pendukung sosialisasi perundungan.</p>
+                            </div>
+                            <div class="relative overflow-hidden rounded-2xl border border-blue-200 shadow-sm bg-white p-2">
+  <a href="https://drive.google.com/file/d/1RACdBWALo-6S3PZ4D6XYCS1o15uPOj4J/view?usp=sharing"
+     target="_blank" rel="noopener noreferrer"
+     class="flex h-48 items-center justify-center rounded-xl bg-blue-50 text-blue-800 font-bold text-sm hover:bg-blue-100 transition">
+     📚 Klik untuk Membuka Preview Materi
+  </a>
+</div>
+                        </div>
+
+                        <a href="https://drive.google.com/file/d/1RACdBWALo-6S3PZ4D6XYCS1o15uPOj4J/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-extrabold px-6 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm w-full">
+                            <span>📂 Buka Materi Edukasi</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 text-left space-y-3">
+                    <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-circle-info text-blue-600"></i> Informasi Dokumen Drive
+                    </h4>
+                    <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside">
+                        <li><strong>Judul Program:</strong> BUKU SAKU SAPA AMAN & Materi Edukasi Anti-Perundungan</li>
+                        <li><strong>Penyusun:</strong> Tim Mahasiswa PPG PGSD Universitas Negeri Jakarta (2026)</li>
+                        <li><strong>Sasaran:</strong> Siswa, Guru, dan Orang Tua SDN Jati 06 & SDN Utan Kayu Selatan 05</li>
+                    </ul>
+                </div>
+            
+<div class="mt-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 text-center">
+  <strong>Akses:</strong> Jika dokumen/foto tidak terbuka untuk pengunjung, ubah izin Google Drive menjadi
+  <strong>“Siapa saja yang memiliki link → Viewer”</strong>.
+</div>
+
+            </div>
+        </section>
+
+        <section id="sec-tentang" class="tab-content hidden py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="bg-blue-100 text-blue-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider">Profil Tim & Kolaborasi</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-2">👥 Tentang Proyek SATU ASA</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-3 shadow-sm">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto text-xl font-bold">🎓</div>
+                        <h3 class="font-bold text-slate-800">Proyek Kepemimpinan</h3>
+                        <p class="text-xs text-slate-600">Program Kepemimpinan Mahasiswa PPG PGSD Universitas Negeri Jakarta.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-3 shadow-sm">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mx-auto text-xl font-bold">🏫</div>
+                        <h3 class="font-bold text-slate-800">Kolaborasi Sekolah</h3>
+                        <p class="text-xs text-slate-600">Integrasi bersama SDN Jati 06 & SDN Utan Kayu Selatan 05.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-3 shadow-sm">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mx-auto text-xl font-bold">🌱</div>
+                        <h3 class="font-bold text-slate-800">Tujuan Utama</h3>
+                        <p class="text-xs text-slate-600">Mewujudkan lingkungan sekolah yang aman, nyaman, santun, dan bebas perundungan.</p>
+                    </div>
+                </div>
+
+                <!-- Group Photo Gallery -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 border-b pb-3">📸 Galeri Anggota Kelompok & Kegiatan</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <div class="overflow-hidden rounded-2xl border-2 border-slate-100 shadow-sm">
+                                <a href="https://drive.google.com/file/d/1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT/view?usp=sharing" target="_blank" rel="noopener noreferrer" title="Buka foto di Google Drive"><img src="https://drive.google.com/thumbnail?id=1aaZgW-Pj-oQ4YPUHgk7gSNTaqB5Sg6rT&sz=w1600" alt="Foto Anggota Kelompok PPG SATU ASA UNJ" class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/0284C7/ffffff?text=Foto+Anggota+Kelompok+PPG'"></a>
+                            </div>
+                            <p class="text-xs font-semibold text-slate-600 text-center">Tim Anggota Kelompok PPG PGSD Universitas Negeri Jakarta</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="overflow-hidden rounded-2xl border-2 border-slate-100 shadow-sm">
+                                <img src="https://drive.google.com/thumbnail?id=1iRJlhuzXOGIORA-jCpUMZv3eBs-KR01Y&sz=w1200" alt="Logo Proyek SATU ASA" class="w-full h-64 object-contain bg-slate-50 p-4 hover:scale-105 transition-transform duration-300" onerror="this.src='https://placehold.co/600x400/F59E0B/ffffff?text=Logo+SATU+ASA'">
+                            </div>
+                            <p class="text-xs font-semibold text-slate-600 text-center">Logo Resmi SATU ASA - SDN Jati 06 & SDN Utan Kayu Selatan 05</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daftar Anggota Kelompok -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 border-b pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-users text-blue-600"></i> Anggota Kelompok Mahasiswa PPG
+                    </h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Ardhana Cindy Asyifa</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510035</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Ari Nirwana</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510050</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Auliana Laili Fajri. Zakya</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510054</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Dania Aulya Adilla</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510001</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Della Purnamasari</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510041</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Erlita Widyadhana. S</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510051</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Gita Safitri</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510047</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">M. Reza Mahardika. P</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510015</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Marisa Puspitasari</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510056</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Pelangi Irba Hidayanti</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510074</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Shalsabila Syahfa</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510020</p>
+                        </div>
+                        <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                            <p class="font-bold text-sm text-slate-800">Syifa Aulia</p>
+                            <p class="text-xs font-semibold text-blue-600">NIM: 200572510038</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alamat Sekolah & LPTK UNJ -->
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-md space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 border-b pb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-rose-600"></i> Lokasi Mitra & LPTK
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center font-bold text-lg mb-2">
+                                    <i class="fa-solid fa-school"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-800 text-base">SDN Utan Kayu Selatan 05</h4>
+                                <p class="text-xs text-slate-600 mt-1">Sekolah Mitra Proyek SATU ASA</p>
+                            </div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=SDN%20Utan%20Kayu%20Selatan%2005" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                                <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center font-bold text-lg mb-2">
+                                    <i class="fa-solid fa-school"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-800 text-base">SDN Jati 06</h4>
+                                <p class="text-xs text-slate-600 mt-1">Sekolah Mitra Proyek SATU ASA</p>
+                            </div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=SDN%20Jati%2006%20Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                                <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 flex flex-col justify-between">
+                            <div>
+                                <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center font-bold text-lg mb-2">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </div>
+                                <h4 class="font-bold text-slate-800 text-base">LPTK Universitas Negeri Jakarta</h4>
+                                <p class="text-xs text-slate-600 mt-1">LPTK Penyelenggara PPG PGSD UNJ</p>
+                            </div>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Universitas%20Negeri%20Jakarta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline pt-2">
+                                <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white mt-16 py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+            <p class="text-sm font-bold text-amber-400">SATU ASA - Proyek Kepemimpinan Anti Bullying</p>
+            <p class="text-xs text-slate-400">Kolaborasi SDN Jati 06 & SDN Utan Kayu Selatan 05 | PPG PGSD Universitas Negeri Jakarta</p>
+            <p class="text-[10px] text-slate-500">© 2026 SATU ASA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-blue-600', 'bg-blue-50');
+                btn.classList.add('text-slate-600');
+            });
+
+            const targetSection = document.getElementById(`sec-${tabId}`);
+            if (targetSection) targetSection.classList.remove('hidden');
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-blue-600', 'bg-blue-50');
+                activeBtn.classList.remove('text-slate-600');
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function showChapter(chapId) {
+            document.querySelectorAll('.chap-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.chap-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-blue-700', 'font-bold');
+                btn.classList.add('text-slate-700');
+            });
+
+            document.getElementById(chapId).classList.remove('hidden');
+            const activeBtn = document.getElementById(`chap-btn-${chapId.split('-')[1]}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-blue-50', 'text-blue-700', 'font-bold');
+            }
+        }
+
+        const quizData = [
+            {
+                q: "Apa yang dimaksud dengan perundungan (bullying)?",
+                a: ["Candaan biasa antar teman", "Perilaku menyakiti atau merendahkan secara berulang dan disengaja", "Bermain bersama di lapangan", "Membantu teman yang belajar"],
+                correct: 1
+            },
+            {
+                q: "Manakah yang BUKAN merupakan 3 ciri utama perundungan?",
+                a: ["Menyakiti secara sengaja", "Dilakukan berulang kali", "Saling menghormati perbedaan", "Ketidakseimbangan kekuatan"],
+                correct: 2
+            },
+            {
+                q: "Apa arti singkatan dari langkah 'B' pada BERANI?",
+                a: ["Berteriak sekerasnya", "Berusaha tetap tenang", "Berlari menjauh", "Berbalik melawan"],
+                correct: 1
+            },
+            {
+                q: "SAPA AMAN merupakan sarana untuk...",
+                a: ["Kotak laporan rahasia dan aman bagi murid", "Tempat menyimpan buku pelajaran", "Kantin sekolah", "Lapangan olahraga"],
+                correct: 0
+            },
+            {
+                q: "Jika melihat teman di-bully, tindakan yang tepat adalah...",
+                a: ["Ikut tertawa dan merekam", "Diam saja agar aman", "Menjadi Teman Penolong dan melaporkan ke guru", "Membalas dengan kekerasan"],
+                correct: 2
+            }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const q = quizData[currentQ];
+            document.getElementById('quiz-progress').innerText = `Pertanyaan ${currentQ + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-question').innerText = q.q;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            q.a.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-blue-50 hover:border-blue-300 font-semibold text-sm transition-all flex items-center gap-3";
+                btn.innerHTML = `<span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">${String.fromCharCode(65 + idx)}</span> ${opt}`;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function selectOption(idx) {
+            const q = quizData[currentQ];
+            const feedback = document.getElementById('quiz-feedback');
+            const options = document.getElementById('quiz-options').children;
+
+            for (let i = 0; i < options.length; i++) {
+                options[i].disabled = true;
+                if (i === q.correct) {
+                    options[i].classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-900');
+                } else if (i === idx) {
+                    options[i].classList.add('bg-rose-50', 'border-rose-500', 'text-rose-900');
+                }
+            }
+
+            feedback.classList.remove('hidden');
+            if (idx === q.correct) {
+                score += 20;
+                feedback.className = "p-4 rounded-xl text-sm font-semibold bg-emerald-100 text-emerald-800";
+                feedback.innerHTML = "✨ Benar sekali! Jawaban kamu tepat.";
+            } else {
+                feedback.className = "p-4 rounded-xl text-sm font-semibold bg-rose-100 text-rose-800";
+                feedback.innerHTML = "❌ Kurang tepat. Mari pelajari lagi di daftar isi ya!";
+            }
+
+            document.getElementById('quiz-score-badge').innerText = `Skor: ${score}`;
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if (currentQ < quizData.length) {
+                loadQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById('quiz-card').classList.add('hidden');
+            const res = document.getElementById('quiz-result');
+            res.classList.remove('hidden');
+            document.getElementById('quiz-final-score').innerText = `Skor: ${score}/100`;
+            
+            let msg = score >= 80 ? "Hebat sekali! Kamu sudah memahami materi SATU ASA dan siap menjadi Teman Penolong!" : "Bagus! Terus belajar dan baca buku saku untuk lebih memahami.";
+            document.getElementById('quiz-message').innerText = msg;
+        }
+
+        function restartQuiz() {
+            currentQ = 0;
+            score = 0;
+            document.getElementById('quiz-score-badge').innerText = `Skor: 0`;
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function submitCommitment(e) {
+            e.preventDefault();
+            const name = document.getElementById('comm-name').value;
+            const school = document.getElementById('comm-school').value;
+
+            document.getElementById('cert-name-display').innerText = name.toUpperCase();
+            document.getElementById('cert-school-display').innerText = school;
+            document.getElementById('cert-result').classList.remove('hidden');
+        }
+
+        window.onload = function() {
+            loadQuestion();
+        };
+    </script>
+</body>
+</html>
